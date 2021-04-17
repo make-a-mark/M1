@@ -29,6 +29,13 @@ const Keyboard = {
         this.elements.main.appendChild(this.elements.keysContainer);
         document.body.appendChild(this.elements.main);
 
+        // Automatically use keyboard for elements with .user-keyboard-input
+        // document.querySelectorAll(".use-keyboard-input").forEach(element => {
+        //     element.addEventListener("mousemove", () => {
+        //         element.value = Keyboard.properties.value;
+        //     });
+        // });
+
     },
 
     _createKeys() {
@@ -77,6 +84,15 @@ const Keyboard = {
 
                     break;
                 
+                case "enter":
+                    keyElement.textContent = key.toLowerCase();
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+                
                 default:
                     keyElement.textContent = key.toLowerCase();
 
@@ -100,11 +116,17 @@ const Keyboard = {
     },
 
     _triggerEvent(handlerName) {
-        console.log("Event Triggered! Event Name: " + handlerName);
+        //console.log("Event Triggered! Event Name: " + handlerName);
+        if (typeof this.eventHandlers[handlerName] == "function") {
+            this.eventHandlers[handlerName](this.properties.value);
+        }
+        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+            element.value = Keyboard.properties.value;
+        });
     }
 
 };
 
-window.addEventListener("DOMContentLoaded", function () {
-    Keyboard.init();
-});
+// window.addEventListener("DOMContentLoaded", function () {
+//     Keyboard.init();
+// });

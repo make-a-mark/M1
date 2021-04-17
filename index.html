@@ -1,4 +1,430 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="keyboard/Keyboard.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper-container {
+      width: 180px;
+      height: 180px;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #56858b;
+      /* background: rgb(90, 105, 153); */
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: inline-block;
+      /* display: flex; */
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Swiper -->
+  <textarea id="use-keyboard-input"></textarea>
+  
+  <div class="swiper-container swipe_left">
+    <div class="swiper-wrapper">
+
+      <div id="slide1_left" class="swiper-slide">
+        
+      </div>
+
+      <div id="slide2_left" class="swiper-slide">
+
+      </div>
+
+      <div id="slide3_left" class="swiper-slide">
+
+      </div>
+
+    </div>
+    <!-- Add Pagination -->
+    <!-- <div class="swiper-pagination swiper-pagination1"></div> -->
+  </div>
+
+  <div class="swiper-container swipe_right">
+    <div class="swiper-wrapper">
+      <div id="slide1_right" class="swiper-slide">
+        
+      </div>
+      <div id="slide2_right" class="swiper-slide">
+        
+      </div>
+
+      <div id="slide3_right" class="swiper-slide">
+        
+      </div>
+    </div>
+    <!-- Add Pagination -->
+    <!-- <div class="swiper-pagination swiper-pagination2"></div> -->
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swipe_leftkeyboard = new Swiper('.swipe_left', {
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination1',
+        clickable: false,
+      },
+    });
+
+    var swipe_rightkeyboard = new Swiper('.swipe_right', {
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination2',
+        clickable: false,
+      },
+    });
+    // var swiper = new Swiper('.swiper-container');
+    // var current_slide = 1;
+    // swiper.on('slideNextTransitionEnd', function() {
+    //   Keyboard.init();
+    //   current_slide += 1;
+    // });
+    // swiper.on('slidePrevTransitionEnd', function() {
+    //   Keyboard.init();
+    //   current_slide -= 1;
+    // });
+  </script>
+
+  <script>
+    var keys_pressed = "";
+
+    const left_keyboard1 = document.createDocumentFragment();
+    const left_keyboard2 = document.createDocumentFragment();
+    const left_keyboard3 = document.createDocumentFragment();
+
+    const right_keyboard1 = document.createDocumentFragment();
+    const right_keyboard2 = document.createDocumentFragment();
+    const right_keyboard3 = document.createDocumentFragment();
+
+    const createIconHTML = (icon_name) => {
+      return `<i class="material-icons">${icon_name}</i>`;
+    };
+
+    /* -------------------------- LEFT KEYBOARD 1 -------------------------- */
+    const left_keyboard1_layout = [
+      "q", "w", "e",
+      "a", "s", "d",
+      "z", "x", "c",
+      "space"
+    ];
+    
+    left_keyboard1_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["e", "d", "c"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      left_keyboard1.appendChild(keyElement);
+      if (insertLineBreak) {
+        left_keyboard1.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide1_left").appendChild(left_keyboard1);
+    
+    /* -------------------------- LEFT KEYBOARD 2 -------------------------- */
+
+    const left_keyboard2_layout = [
+      "w", "e", "r",
+      "s", "d", "f",
+      "x", "c", "v",
+      "space"
+    ];
+
+    left_keyboard2_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["r", "f", "v"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      left_keyboard2.appendChild(keyElement);
+      if (insertLineBreak) {
+        left_keyboard2.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide2_left").appendChild(left_keyboard2);
+
+     /* -------------------------- LEFT KEYBOARD 3 -------------------------- */
+
+     const left_keyboard3_layout = [
+      "e", "r", "t",
+      "d", "f", "g",
+      "c", "v", "b",
+      "space"
+    ];
+
+    left_keyboard3_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["t", "g", "b"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      left_keyboard3.appendChild(keyElement);
+      if (insertLineBreak) {
+        left_keyboard3.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide3_left").appendChild(left_keyboard3);
+
+    /* -------------------------- RIGHT KEYBOARD 1 -------------------------- */
+
+    const right_keyboard1_layout = [
+      "y", "u", "i",
+      "g", "h", "j",
+      "v", "b", "backspace",
+      "space"
+    ];
+
+
+    right_keyboard1_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["i", "j", "backspace"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        case "backspace":
+          keyElement.innerHTML = createIconHTML("backspace");
+          keyElement.addEventListener("click", () => {
+            keys_pressed = keys_pressed.slice(0, -1);
+            // keys_pressed = keys_pressed.substring(0, keys_pressed.length - 1);
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      right_keyboard1.appendChild(keyElement);
+      if (insertLineBreak) {
+        right_keyboard1.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide1_right").appendChild(right_keyboard1);
+
+    /* -------------------------- RIGHT KEYBOARD 2 -------------------------- */
+
+    const right_keyboard2_layout = [
+      "u", "i", "o",
+      "h", "j", "k",
+      "b", "n", "backspace",
+      "space"
+    ];
+
+
+    right_keyboard2_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["o", "k", "backspace"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        case "backspace":
+          keyElement.innerHTML = createIconHTML("backspace");
+          keyElement.addEventListener("click", () => {
+            keys_pressed = keys_pressed.slice(0, -1);
+            // keys_pressed = keys_pressed.substring(0, keys_pressed.length - 1);
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      right_keyboard2.appendChild(keyElement);
+      if (insertLineBreak) {
+        right_keyboard2.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide2_right").appendChild(right_keyboard2);
+
+    /* -------------------------- RIGHT KEYBOARD 3 -------------------------- */
+
+    const right_keyboard3_layout = [
+      "i", "o", "p",
+      "j", "k", "l",
+      "n", "m", "backspace",
+      "space"
+    ];
+
+
+    right_keyboard3_layout.forEach(key => {
+      const keyElement = document.createElement("button");
+      const insertLineBreak = ["p", "l", "backspace"].indexOf(key) !== -1;
+      keyElement.setAttribute("type", "button");
+      keyElement.classList.add("keyboard_key");
+      keyElement.textContent = key.toLowerCase();
+      switch(key) {
+        case "space":
+          keyElement.innerHTML = createIconHTML("space_bar");
+          keyElement.className = ("keyboard_key keyboard_key--extra-wide");
+          keyElement.addEventListener("click", () => {
+            keys_pressed += " ";
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        case "backspace":
+          keyElement.innerHTML = createIconHTML("backspace");
+          keyElement.addEventListener("click", () => {
+            keys_pressed = keys_pressed.slice(0, -1);
+            // keys_pressed = keys_pressed.substring(0, keys_pressed.length - 1);
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+
+        default:
+          keyElement.addEventListener("click", () => {
+            keys_pressed += key.toLocaleLowerCase();
+            document.getElementById("use-keyboard-input").value = keys_pressed;
+          });
+          break;
+      }
+      
+      right_keyboard3.appendChild(keyElement);
+      if (insertLineBreak) {
+        right_keyboard3.appendChild(document.createElement("br"));
+      }
+    });
+
+    document.getElementById("slide3_right").appendChild(right_keyboard3);
+
+  </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>TinyType</title>
@@ -9,8 +435,9 @@
     </head>
 
     <body>
+        <textarea class="use-keyboard-input"></textarea>
 
-        <textarea stye="position: absolute; top: 130px; right: 30px; width: 300px;"></textarea>
+        <!-- <textarea class="use-keyboard-input" style="position: absolute; top: 130px; right: 30px; width: 300px;"></textarea> -->
         
         <!-- <div class="keyboard">
             <div class="keyboard_keys">
@@ -29,4 +456,4 @@
         
         </script>
     </body>
-</html>
+</html> -->
