@@ -50,3 +50,9 @@
     height: 20px;
     max-width: 180px;
 }
+
+.text-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
