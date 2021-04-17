@@ -1,4 +1,4 @@
-//const { Keyboard } = require("swiper");
+/* Base Code for the keyboard, not used anymore */
 
 const Keyboard = {
     elements: {

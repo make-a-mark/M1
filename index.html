@@ -29,6 +29,11 @@
     .swiper-container {
       width: 180px;
       height: 180px;
+      display: inline-block;
+    }
+
+    .left-keyboard {
+      margin-left: 39%;
     }
 
     .swiper-slide {
@@ -59,7 +64,7 @@
   <!-- Swiper -->
   <textarea id="use-keyboard-input" class="text-center"></textarea>
   
-  <div class="swiper-container swipe_left">
+  <div class="swiper-container swipe_left left-keyboard ">
     <div class="swiper-wrapper">
 
       <div id="slide1_left" class="swiper-slide">
@@ -117,16 +122,6 @@
         clickable: false,
       },
     });
-    // var swiper = new Swiper('.swiper-container');
-    // var current_slide = 1;
-    // swiper.on('slideNextTransitionEnd', function() {
-    //   Keyboard.init();
-    //   current_slide += 1;
-    // });
-    // swiper.on('slidePrevTransitionEnd', function() {
-    //   Keyboard.init();
-    //   current_slide -= 1;
-    // });
   </script>
 
   <script>
@@ -422,38 +417,4 @@
   </script>
 </body>
 
-</html>
-
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <title>TinyType</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="keyboard/Keyboard.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    </head>
-
-    <body>
-        <textarea class="use-keyboard-input"></textarea>
-
-        <!-- <textarea class="use-keyboard-input" style="position: absolute; top: 130px; right: 30px; width: 300px;"></textarea> -->
-        
-        <!-- <div class="keyboard">
-            <div class="keyboard_keys">
-                <button type="button" class="keyboard_key">a</button>
-                <button type="button" class="keyboard_key keyboard_key--wide">
-                    <i class="material-icons">backspace</i>
-                </button>
-                <button type="button" class="keyboard_key keyboard_key--extra-wide">
-                    <i class="material-icons">space_bar</i>
-                </button>
-            </div>
-            
-        </div> -->
-
-        <script src="keyboard/Keyboard.js">
-        
-        </script>
-    </body>
 </html>
