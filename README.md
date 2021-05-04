@@ -26,3 +26,29 @@ Though the design works on desktop, SwipeyKey is mainly intended for mobile!
 [Swiper.js](https://swiperjs.com/)
 
 [Dcode's Virtual Keyboard Tutorial](https://www.youtube.com/watch?v=N3cq0BHDMOY&ab_channel=dcode)
+
+
+# M2 - EmojiType
+Mini-Project 2: EmojiType for ECE 188 Applied &amp; Interactive Machine Learning
+
+## Project Specifications
+Your task is to build on M1 and add emoji entry by gesture.
+
+* All the input requirements remain the same as M0 (e.g., pointing only, limited input area—please refer back to the M0 doc);
+
+* Design a suite of pointing-based gestures to input at least five emojis, e.g., drawing a smily-shaped arc will input "😊"; 
+
+* Implement a gesture recognizer that works for your design and integrate it into M1 as a working prototype;
+
+## My EmojiKey:
+### Emojis Recognized:
+* 🌊
+* 💪
+* 🔥
+* 🍜
+* 💙
+
+## Resources used
+[$1 Unistroke Recognizer](http://depts.washington.edu/acelab/proj/dollar/index.html)
+
+[$1 Unistroke JS Wrapper Library](https://github.com/nok/onedollar-unistroke-coffee)
